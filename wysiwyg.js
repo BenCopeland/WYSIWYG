@@ -101,7 +101,14 @@ for (let i = 0; i < containerEl.length; i++) {
 	});
 }
 
-
+//clear input field on enter key press
+document.addEventListener("keyup", function(e) {
+	if(e.keyCode == 13){
+		inputEl.value = "";
+		//removes dotted border
+		currentContainer[0].classList.remove(`dotted`);
+	}
+});
 
 
 
