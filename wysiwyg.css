@@ -1,0 +1,20 @@
+img {
+	height: 100px;
+}
+
+.person__container {
+	border: 1px solid darkgrey;
+	margin-top: 5px;
+}
+
+.dotted {
+	border: 2px dotted black;
+}
+
+.person__container:nth-child(odd) {
+	background-color: lightblue;
+}
+
+.person__container:nth-child(even) {
+	background-color: lightyellow;
+}
