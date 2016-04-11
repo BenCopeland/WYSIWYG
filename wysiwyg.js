@@ -1,3 +1,5 @@
+"use strict";
+
 var famousPeopleObj = [
 	{
 	title: "Samurai",
@@ -54,19 +56,28 @@ var famousPeopleObj = [
 		death: "not this day"
 		}
 	}
-]
+];
 
+//targeting output element and text field.
+var outputEl = document.getElementById("outputEl");
+var inputEl = document.getElementById("inputEl");
 
 //adds person container divs with individual ids
 var counter = 0;
-var outputEl = document.getElementById("outputEl");
 for (; counter < famousPeopleObj.length ; counter++) {
 	outputEl.innerHTML += `<div class="person__container" id="person--${counter}"></div>`;
 	//targets individual ids and populates container divs with content from famousPeopleObj
 	var output = document.getElementById(`person--${counter}`);
-	output.innerHTML += `<person><header>`+famousPeopleObj[counter].name+`, `+famousPeopleObj[counter].title+`</header><section><img src="`+famousPeopleObj[counter].image+`"</img>`+famousPeopleObj[counter].bio+`</section><footer>`+famousPeopleObj[counter].lifespan.birth+` - `+famousPeopleObj[counter].lifespan.death+`</footer></person>`;
+	output.innerHTML += `<person><header>`+famousPeopleObj[counter].name+`, `+famousPeopleObj[counter].title+`</header><img src="`+famousPeopleObj[counter].image+`"</img><section>`+famousPeopleObj[counter].bio+`</section><footer>`+famousPeopleObj[counter].lifespan.birth+` - `+famousPeopleObj[counter].lifespan.death+`</footer></person>`;
 }
 
+//globally accessable variable to be used in keyup eventlistener
+var currentContainer;
+//keyup event listener to replace bio with input field text
+inputEl.addEventListener("keyup", function(e) {
+  var test = currentContainer[0].children[0].children[2];
+  test.innerHTML = inputEl.value;
+});
 
 //targets all person containers
 var containerEl = document.getElementsByClassName("person__container");
@@ -77,17 +88,18 @@ for (let i = 0; i < containerEl.length; i++) {
 		//removes dotted class from all person container divs
 		for (let i = 0; i < containerEl.length; i++) {
 			var output = document.getElementById(`person--${i}`);
-			output.classList.remove("dotted");
+			output.classList.remove(`dotted`);
 		};
 		//adds class of dotted to clicked person container div
-		this.classList.add("dotted");
+		this.classList.add(`dotted`);
+		//gives input field focus
+		inputEl.focus();
+		//resets input field value to zero upon clicking different person container div
+		inputEl.value = "";
+		//most recent person container div clicked added to globally accessable variable
+		currentContainer = document.getElementsByClassName("dotted");
 	});
 }
-
-
-
-
-
 
 
 
